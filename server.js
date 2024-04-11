@@ -15,7 +15,7 @@ app.use(express.json());
 
 app.use("/api", router);
 
-app.listen(5000, () => {
+app.listen(5000, async () => {
+  await connectDB()
   console.log(`server is running on http://localhost:${config.PORT}`);
-  connectDB();
 });

@@ -22,7 +22,7 @@ export const register = async (req, res) => {
         userId: userCreated._id.toString(),
       });
     } catch (error) {
-      Error(res, error, 400);
+      Error(res, error.message, 400);
     }
   }
 };
