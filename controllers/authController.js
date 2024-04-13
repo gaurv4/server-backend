@@ -8,7 +8,7 @@ export const register = async (req, res) => {
   const userExixts = await userModel.findOne({ email });
 
   if (userExixts) {
-    Error(res, "user already exixts", 400);
+    Error(res, "Email already exists, Try to Login", 400);
   } else {
     try {
       const userCreated = await userModel.create({
@@ -17,7 +17,7 @@ export const register = async (req, res) => {
         password: password,
       });
       res.status(201).json({
-        msg: "registration successfully",
+        msg: "Registration successfully",
         token: await userCreated.generateToken(),
         userId: userCreated._id.toString(),
       });
@@ -33,19 +33,19 @@ export const login = async (req, res) => {
   let user = await userModel.findOne({ email });
 
   if (!user) {
-    Error(res, "User not found", 404);
+    Error(res, "Couldn't find your Account", 404);
   } else {
     try {
       const isVerify = await bcrypt.compare(password, user.password);
 
       if (isVerify) {
         res.status(202).json({
-          msg: "login successfully",
+          msg: "Login successfully",
           token: await user.generateToken(),
           userId: user._id.toString(),
         });
       } else {
-        Error(res, "invalid username or password", 401);
+        Error(res, "Wrong password. Try again or click Forgot password to reset it.", 401);
       }
     } catch (error) {
       Error(res, error, 400);

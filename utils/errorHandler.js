@@ -3,7 +3,7 @@ const Error = (res, message, status) => {
   const statusCode = status || 500;
 
   res.status(statusCode).json({
-    msg: msg,
+    error: msg,
   });
 };
 
