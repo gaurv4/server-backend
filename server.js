@@ -9,7 +9,7 @@ dotenv.config()
 
 const app = express();
 
-app.use(cors({ origin: "http://localhost:3000"}));
+app.use(cors({ origin: config.ORIGIN_CORS}));
 
 app.use(express.json());
 
